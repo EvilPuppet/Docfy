@@ -1,0 +1,43 @@
+{% extends 'layouts/default.njk' %}
+
+{% block body %}
+  <div class="container">
+    <h1>Docfy</h1>
+    <div class="user-info">
+      <p class="welcome">
+        Bem vindo<br>
+        <strong>Diego Fernandes</strong>
+      </p>
+      <a href="signin.html" class="btn btn-danger">
+        <img src="img/signout.svg">
+      </a>
+    </div>
+  </div>
+</header>
+
+<section id="main">
+  <div class="container">
+    <header>
+      <h2>Meus projetos (4)</h2>
+      <div class="addon">
+        <form action="" method="post">
+          <input type="text" name="name" placeholder="Novo projeto">
+          <button type="submit" class="btn">
+            <img src="img/plus.svg">
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <section id="content">
+      <div class="project-list">
+        <a href="project.html">Exemplo de projeto</a>
+        <a href="project.html">Outro projeto</a>
+        <a href="project.html">Mais um projeto</a>
+        <a href="project.html">Projeto exemplo</a>
+      </div>
+    </section>
+  </div>
+</section>
+</div>
+{% endblock %}

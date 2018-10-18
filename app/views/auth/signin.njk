@@ -1,0 +1,13 @@
+{% extends 'layouts/default.njk' %}
+
+{% block body %}
+  <div class="auth-wrapper">
+    <h1>Docfy</h1>
+    <form action="/authenticate" method="get">
+      <input type="email" name="email" placeholder="Digite seu e-mail">
+      <input type="password" name="password" placeholder="Digite sua senha">
+      <button type="submit">Entrar</button>
+      <a href="/signup">Criar minha conta</a>
+    </form>
+  </div>
+{% endblock %}
