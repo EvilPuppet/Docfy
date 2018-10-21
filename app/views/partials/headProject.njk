@@ -1,0 +1,20 @@
+<header>
+  <h2>{{project.title}}</h2>
+
+  <div class="addon">
+    <a href="#" data-modal-open="#edit-title" class="btn btn-edit">Editar projeto</a>
+    <form action="/app/projects/{{activeProjectId}}?_method=DELETE" method="post">
+      <button type="submit" class="btn btn-danger">Excluir projeto</button>
+    </form>
+  </div>
+</header>
+
+<div class="modal" id="edit-title">
+  <form class="modal-content" action="/app/projects/edit/{{activeProjectId}}?_method=PUT" method="post">
+    <input type="text" name="title" value="{{project.title}}">
+    <button type="submit" class="btn">
+      SALVAR
+    </button>
+    <a href="#" data-modal-close="#edit-title">CANCELAR</a>
+  </form>
+</div>

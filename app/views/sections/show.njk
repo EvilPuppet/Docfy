@@ -1,0 +1,21 @@
+{% extends 'layouts/dashboard.njk' %}
+{% block body %}
+<section id="main">
+  <div class="container">
+  {% include 'partials/headProject.njk' %}
+    <section id="content">
+      {% include 'partials/nav.njk' %}
+      <article>
+        <div class="project-header">
+          <h1>{{section.title}}</h1>
+          <a href="/app/projects/{{activeProjectId}}/sections/edit/{{activeSectionId}}" class="edit">Editar seção</a>
+          <form action="/app/projects/{{activeProjectId}}/sections/{{activeSectionId}}?_method=DELETE" method="post">
+            <button type="submit" class="delete">Remover seção</button>
+          </form>
+        </div>
+        {{ section.formatedContent | safe }}
+      </article>
+    </section>
+  </div>
+</section>
+{% endblock %}

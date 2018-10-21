@@ -5,6 +5,7 @@ module.exports = {
   signin(req, res) {
     return res.render('auth/signin');
   },
+
   signup(req, res) {
     return res.render('auth/signup');
   },
@@ -14,7 +15,7 @@ module.exports = {
       const { email } = req.body;
 
       if (await User.findOne({ where: { email } })) {
-        req.flash('error', 'E-mail já cadastrado');
+        req.flash('error', 'Email já cadastrado');
         return res.redirect('back');
       }
 
@@ -22,38 +23,38 @@ module.exports = {
 
       await User.create({ ...req.body, password });
 
-      req.flash('success', 'Usuário cadastrado com sucesso');
+      req.flash('success', 'Usuário cadastradro com sucesso');
       return res.redirect('/');
     } catch (err) {
       return next(err);
     }
   },
 
-  async authenticate(req, res) {
-    const { email, password } = req.body;
+  async authenticate(req, res, next) {
+    try {
+      const { email, password } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+      const user = await User.findOne({ where: { email } });
 
-    if (!user) {
-      req.flash('error', 'Usuário inexistente');
-      return res.redirect('back');
+      if (!user) {
+        req.flash('error', 'Usuário inexistente');
+        return res.redirect('back');
+      }
+
+      if (!(await bcrypt.compare(password, user.password))) {
+        req.flash('error', 'Senha incorreta');
+        return res.redirect('back');
+      }
+
+      req.session.user = user;
+
+      return req.session.save(() => res.redirect('/app/dashboard'));
+    } catch (err) {
+      return next(err);
     }
-
-    if (!await bcrypt.compare(password, user.password)) {
-      req.flash('error', 'Senha incorreta');
-      return res.redirect('back');
-    }
-
-    req.session.user = user;
-
-    return req.session.save(() => {
-      res.redirect('app/dashboard');
-    });
   },
 
   signout(req, res) {
-    return req.session.destroy(() => {
-      res.redirect('/');
-    });
+    return req.session.destroy(() => res.redirect('/'));
   },
 };

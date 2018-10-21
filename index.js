@@ -5,8 +5,9 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const routes = require('./app/routes');
-
 const sessionConfig = require('./config/session');
+const methodOverride = require('method-override');
+
 
 const app = express();
 
@@ -18,6 +19,7 @@ nunjucks.configure(path.resolve('app', 'views'), {
 });
 
 app.set('view engine', 'njk');
+app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sessionConfig));
 app.use(flash());

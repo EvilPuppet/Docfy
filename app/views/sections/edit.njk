@@ -1,0 +1,18 @@
+{% extends 'layouts/dashboard.njk' %}
+{% block body %}
+<section id="main">
+      <div class="container">
+        {% include 'partials/headProject.njk' %}
+        <section id="content">
+          {% include 'partials/nav.njk' %}
+
+          <article>
+            <form action="/app/projects/{{activeProjectId}}/sections/{{activeSectionId}}?_method=PUT" method="POST">
+              <input type="text" name="title" value="{{section.title}}">
+              <textarea class="mde" id="content" name="content">{{section.content}}</textarea>
+              <button type="submit" class="btn">Salvar</button>
+            </form>
+          </article>
+      </div>
+    </section>
+{% endblock %}
